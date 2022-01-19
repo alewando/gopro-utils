@@ -17,22 +17,32 @@ func stringInSlice(a string, list []string) bool {
 
 func Read(f io.Reader) (*TELEM, error) {
 	labels := []string{
+		"AALP",
 		"ACCL",
+		"CORI",
 		"DEVC",
 		"DVID",
 		"DVNM",
 		"EMPT",
 		"GPRO",
 		"GPS5",
+		"GPSA",
 		"GPSF",
 		"GPSP",
 		"GPSU",
+		"GRAV",
 		"GYRO",
 		"HD5.",
+		"IORI",
 		"ISOG",
+		"LRVO",
+		"LRVS",
+		"LSKP",
+		"MSKP",
 		"SCAL",
 		"SHUT",
 		"SIUN",
+		"STMP",
 		"STNM",
 		"STRM",
 		"TICK",
@@ -56,6 +66,8 @@ func Read(f io.Reader) (*TELEM, error) {
 		"HUES",
 		"SROT",
 		"TIMO",
+		"WNDM",
+		"MWET",
 	}
 
 	label := make([]byte, 4, 4) // 4 byte ascii label of data
@@ -77,8 +89,7 @@ func Read(f io.Reader) (*TELEM, error) {
 		label_string := string(label)
 
 		if !stringInSlice(label_string, labels) {
-			err := fmt.Errorf("Could not find label in list: %s (%x)\n", label, label)
-			return nil, err
+			print(fmt.Sprintf("Could not find label in list: %s (%x)\n", label, label))
 		}
 
 		// pick out the label description
