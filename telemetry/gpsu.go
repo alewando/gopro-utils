@@ -16,14 +16,10 @@ func (gpsu *GPSU) Parse(bytes []byte) error {
 		return errors.New("Invalid length GPSU packet")
 	}
 
-	str := string(bytes)
-	if str == "000000000000.000" {
-		fmt.Printf("GPSU: Skipping invalid GPS timestamp: %s\n", str)
+	t, err := time.Parse("060102150405", string(bytes))
+	if err != nil {
+		fmt.Printf("GPSU: Skipping invalid GPS timestamp: %s\n", err)
 	} else {
-		t, err := time.Parse("060102150405", string(bytes))
-		if err != nil {
-			return err
-		}
 		gpsu.Time = t
 	}
 
