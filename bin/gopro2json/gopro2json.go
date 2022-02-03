@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/stilldavid/gopro-utils/telemetry"
+	"github.com/alewando/gopro-utils/telemetry"
 )
 
 type data struct {
